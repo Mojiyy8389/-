@@ -1,14 +1,25 @@
-[package]
-name = "rdp_hunter_cli"
-version = "6.0.0"
-edition = "2021"
+name: Build RDP Hunter
 
-[dependencies]
-tokio = { version = "1.35", features = ["rt-multi-thread", "net", "time", "io-util", "process", "macros", "sync", "signal"] }
-anyhow = "1.0"
-ipnet = "2.9"
-chrono = "0.4"
-crossbeam-channel = "0.5"
-parking_lot = "0.12"
-which = "6.0"
-colored = "2.1"
+on:
+  push:
+    branches: [ main ]
+  workflow_dispatch:
+
+jobs:
+  build:
+    runs-on: windows-latest
+
+    steps:
+    - uses: actions/checkout@v4
+
+    - name: Install Rust
+      uses: dtolnay/rust-toolchain@stable
+
+    - name: Build
+      run: cargo build --release
+
+    - name: Upload EXE
+      uses: actions/upload-artifact@v4
+      with:
+        name: rdp_hunter_cli
+        path: target/release/rdp_hunter_cli.exe

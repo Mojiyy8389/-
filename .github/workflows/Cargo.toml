@@ -1,0 +1,17 @@
+[package]
+name = "rdp_hunter"
+version = "6.0.0"
+edition = "2021"
+
+[dependencies]
+tokio = { version = "1.35", features = ["full"] }
+egui = "0.24"
+eframe = "0.24"
+rfd = "0.12"
+anyhow = "1.0"
+ipnet = "2.9"
+chrono = "0.4"
+num_cpus = "1.16"
+crossbeam-channel = "0.5"
+parking_lot = "0.12"
+which = "6.0"
